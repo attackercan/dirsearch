@@ -53,7 +53,8 @@ class HTMLReport(FileBaseReport):
                     "contentLength": human_size(entry.length),
                     "contentType": entry.type,
                     "redirect": entry.redirect,
+                    "contentLengthBytes": entry.length,
                 }
             )
-
+        results = sorted(results, key=lambda item: (item["status"], item["url"]))
         return template.render(metadata=metadata, results=results)
